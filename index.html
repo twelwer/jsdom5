@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КТ5.12RRR</title>
+  <style>
+   body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f2f2f2;
+    }
+    .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    form    {
+        display: inline-block;
+        vertical-align: top;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px #00000033;
+        width: 265px;
+    }
+    form label {
+        font-weight: bold;
+        color: #333;
+    }
+    form input[type="text"],
+    form input[type="month"] {
+        width: 250px;
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+    form input[type="submit"] {
+        padding: 8px 15px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    .card-thumbnail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100px;
+        max-height: 60px;
+        margin-left: 20px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .card-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #cd7f32;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px #00000033;
+        margin-left: 20px;
+        width: 300px;
+    }
+    .card-details p {
+        margin: 5px 0;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="card-form">
+      <label for="bank-name">Название банка:</label>
+      <input type="text" id="bank-name" required><br><br>
+      <label for="payment-system">Тип платежной системы:</label>
+      <input type="text" id="payment-system" required><br><br>
+      <label for="card-number">Номер карты (16 цифр):</label>
+      <input type="text" id="card-number" pattern="\d{16}" required><br><br>
+      <label for="card-holder">Имя держателя карты:</label>
+      <input type="text" id="card-holder" required><br><br>
+      <label for="expiry-date">Месяц и год окончания карты:</label>
+      <input type="month" id="expiry-date" required><br><br>
+      <input type="submit" value="Отправить">
+    </form>
+    <div class="card-details">
+      <img class="card-thumbnail" id="card-thumbnail">
+      <p id="bank-details"></p>
+      <p id="payment-system-details"></p>
+      <p id="card-number-details"></p>
+      <p id="card-holder-details"></p>
+      <p id="expiry-date-details"></p>
+    </div>
+  </div>
+  <table id="card-table">
+    <tr>
+      <th>Название банка</th>
+      <th>Тип платежной системы</th>
+      <th>Номер карты</th>
+      <th>Имя держателя</th>
+      <th>Месяц и год окончания</th>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("card-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var bankName = document.getElementById("bank-name").value;
+      var paymentSystem = document.getElementById("payment-system").value;
+      var cardNumber = document.getElementById("card-number").value;
+      var cardHolder = document.getElementById("card-holder").value;
+      var expiryDate = document.getElementById("expiry-date").value;
+      var table = document.getElementById("card-table");
+      var row = table.insertRow(-1);
+      var bankCell = row.insertCell(0);
+      var paymentCell = row.insertCell(1);
+      var numberCell = row.insertCell(2);
+      var holderCell = row.insertCell(3);
+      var expiryCell = row.insertCell(4);
+      bankCell.innerHTML = bankName;
+      paymentCell.innerHTML = paymentSystem;
+      numberCell.innerHTML = cardNumber;
+      holderCell.innerHTML = cardHolder;
+      expiryCell.innerHTML = expiryDate;
+      document.getElementById("card-thumbnail").src = "https://upload.wikimedia.org/wikipedia/ru/thumb/8/86/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A2%D0%B8%D0%BD%D1%8C%D0%BA%D0%BE%D1%84%D1%84.svg/1024px-%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A2%D0%B8%D0%BD%D1%8C%D0%BA%D0%BE%D1%84%D1%84.svg.png?20201001132644"; 
+      document.getElementById("bank-details").textContent = "Название банка: " + bankName;
+      document.getElementById("payment-system-details").textContent = "Тип платежной системы: " + paymentSystem;
+      document.getElementById("card-number-details").textContent = "Номер карты: " + cardNumber;
+      document.getElementById("card-holder-details").textContent = "Имя держателя: " + cardHolder;
+      document.getElementById("expiry-date-details").textContent = "Месяц и год окончания: " + expiryDate;
+      document.getElementById("card-form").reset();
+    });
+  </script>
+</body>
+</html>
